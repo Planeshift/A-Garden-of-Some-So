@@ -78,17 +78,17 @@
             this.level = level;
             this.X = X;
             this.Y = Y;
+            this.audioRemove;
         }
 
         init(){
             this.tile.addEventListener("click", e => this.spawnFloodTile(e));
-
+            this.audioRemove = new Audio("../audio/plop" + Math.floor(Math.random() * 10 + 1) + ".mp3");
         }
 
         remove(){
             this.tile.remove();
-            let audio = new Audio("../audio/plop" + Math.floor(Math.random() * 10 + 1) + ".mp3");
-            audio.play();
+            this.audioRemove.play();
         }
         /**
          * 
