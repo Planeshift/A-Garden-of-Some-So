@@ -13,10 +13,8 @@ body{
     width: 100%;
     min-height: 100vh;
     overflow: hidden;
-}
-
-.flower{
-    position: absolute;
+    background-color: #b5ffa6;
+    cursor: pointer;
 }
 
 .pistil{
