@@ -63,6 +63,7 @@
                 document.getElementById("app-content").classList.add("cursor-pointer");
             }, 1000);
     }
+    
     class FloodTile{
         /**
          * 
@@ -136,6 +137,7 @@
             let match = matchColors.exec(initialTileColor).slice(1);
             let newTileColor = "rgb(" + match.map(color => Math.min(255, Math.max(0, (Math.random() - 1) * (1 / (this.level + 1)) * 128 + parseInt(color))) ).join(",") +")";
             */
+
             newTile.style.backgroundColor = getRandomPastelColor();
 
             this.tile.parentNode.appendChild(newTile);
