@@ -1,0 +1,16 @@
+Version 0.1 - 2022 05 27
+
+Added this version file, that I will surely forget to update.
+
+This will be used instead of commits when I do large changes and forget to commit each change as it comes along.
+
+Anyway, here's a list of changes, in no particular order:
+
+- Changed the layout and organization. Files are now organized much closer to what I want them to be in the end. This may change again.
+- Added a homepage, an about page and a credits page (still WIP on all three)
+- Added volume controls
+- Added a volume.js file that handles volume controls
+- Added a home button
+- Added a credits button
+- Flower wall has been finished, with harp sounds!
+- Minor changes and fixes to flooding tiles
