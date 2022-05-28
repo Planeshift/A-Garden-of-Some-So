@@ -7,6 +7,7 @@
     <title>A Garden Of Some Sort</title>
     <link rel="stylesheet" href="../css/garden-common.css">
     <link rel="stylesheet" href="../css/garden.css">
+    <link rel="stylesheet" href="../../Areas/Flower Wall/css/flower-wall.css">
 </head>
 <body>
     <div id="content-container">
@@ -23,11 +24,11 @@
             </div>
 
             <nav id="header-nav">
-                <a href="./about.html">About</a>     
+                <a class="header-nav-link" href="./about.html">About</a>     
                 <div class="separator">·</div>
-                <a href="./garden.html">The Garden</a>
+                <a class="header-nav-link" href="./garden.html">The Garden</a>
                 <div class="separator">·</div>
-                <a href="./credits.html">Credits</a>
+                <a class="header-nav-link" href="./credits.html">Credits</a>
             </nav>
 
 
@@ -38,17 +39,35 @@
             <h1>The Garden</h1>
 
             <p id="garden-introduction">
-                A small collection of various little things I made, that have no particular purpose except being sort of pretty to look act and interact with. Like a little personal garden, if you will.
+                A small collection of various little things I made, that have no particular purpose except being sort of pretty to look at and interact with. Like a little personal garden, if you will.
             </p>
         
             <div id="areas-tiles-container">
-                <div class="area-tile">
-                    <a href="../../Areas/Flooding Tiles/html/flooding-tiles.html">Flooding Tiles</a>
-                </div>
+                <a href="../../Areas/Flooding Tiles/html/flooding-tiles.html" class="area-tile">
+                    <div class="area-tile-content">
+                        <div class="area-tile-title">Flooding Tiles</div>
+                        <div id="area-tile-background-flooding-tiles" class="area-tile-background">
+                            <div id="flood-tile-7" class="flood-tile"></div>
+                            <div id="flood-tile-6" class="flood-tile"></div>
+                            <div id="flood-tile-5" class="flood-tile"></div>
+                            <div id="flood-tile-4" class="flood-tile"></div>
+                            <div id="flood-tile-3" class="flood-tile"></div>
+                            <div id="flood-tile-2" class="flood-tile"></div>
+                            <div id="flood-tile-1" class="flood-tile"></div>
+                            <div class="flood-tile" id="base-tile"></div>
+
+                        </div>
+                    </div>
+                </a>
                 
-                <div class="area-tile">
-                    <a href="../../Areas/Flower Wall/html/flower-wall.html">Flower Wall</a>
-                </div>
+                <a href="../../Areas/Flower Wall/html/flower-wall.html" class="area-tile">
+                    <div class="area-tile-content">
+                        <div class="area-tile-title">Flower Wall</div>
+                        <div id="area-tile-background-flower-wall" class="area-tile-background">
+                            
+                        </div>
+                    </div>
+                </a>
 
             </div>
 
@@ -56,5 +75,6 @@
 
     </div>
 
+    <script src="../js/garden.js"></script>
 </body>
 </html>
