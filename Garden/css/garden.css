@@ -1,0 +1,20 @@
+#garden-introduction{
+    font-size: 1.1rem;
+    text-align-last: center;
+    margin: 0 0 2rem;
+}
+
+#areas-tiles-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.area-tile{
+    width: 100%;
+}
+
+@media (min-width: 640px){
+    .area-tile{
+        width: 50%;
+    }
+}

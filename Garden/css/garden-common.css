@@ -1,0 +1,84 @@
+/* Generic CSS */
+
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+}
+
+html{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+}
+
+h1{
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1.5rem 0 1.5rem;
+    text-align: center;
+}
+
+h2{
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin: 1rem 0 1rem;
+    text-align: center;
+}
+
+/* Content CSS */
+
+#content-container{
+    width: 100%;
+    max-width: 1280px;
+    margin: auto;
+}
+
+@media (min-width: 2560px){
+    #content-container{
+        max-width: 1920px;
+    }
+}
+
+header{
+    width: fit-content;
+    margin: 3rem auto 4.5rem;
+    text-transform: uppercase;
+    line-height: 0.9;
+}
+
+#header-title-container{
+    margin-bottom: 1rem;
+    user-select: none;
+}
+
+#header-title-line-1{
+    font-size: 4rem;
+}
+
+#header-title-line-2{
+    font-size: 2.8rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+#header-nav{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.25rem;
+}
+
+.separator{
+    font-weight: 900;
+}
+
+#content-subcontainer{
+    width: 100%;
+    max-width: 960px;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+

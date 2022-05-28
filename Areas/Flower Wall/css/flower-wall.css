@@ -1,20 +1,11 @@
-*,
-*::after,
-*::before{
-    box-sizing: border-box;
-}
-
-body{
-    margin: 0;
-}
-
 #app-container{
+    background-color: #b5ffa6;
+}
+
+.flower{
     position: relative;
     width: 100%;
-    min-height: 100vh;
-    overflow: hidden;
-    background-color: #b5ffa6;
-    cursor: pointer;
+    height: 100%;
 }
 
 .pistil{

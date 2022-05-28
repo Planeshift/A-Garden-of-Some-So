@@ -1,0 +1,39 @@
+#base-tile{
+    background-color: #ffffff;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    width: 128px;
+    height: 128px;
+    transition: background-color 200ms ease-in-out;
+}
+
+.flood-tile{
+    position: absolute;
+    border-radius: 6px;
+    animation: spawn-flood-tile 1000ms ease-in-out forwards;
+}
+
+@keyframes spawn-flood-tile {
+    0%{
+        transform: translate(-50%, -50%) scale(0);
+    }
+    40%{
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+    70%{
+        transform: translate(-50%, -50%) scale(0.92);
+    }
+    80%{
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+    90%{
+        transform: translate(-50%, -50%) scale(0.95);
+        cursor: default;
+    }
+    100%{
+        transform: translate(-50%, -50%) scale(1);
+        cursor: pointer;
+    }
+}
+

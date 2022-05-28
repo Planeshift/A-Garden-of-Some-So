@@ -1,0 +1,296 @@
+/* Generic CSS */
+
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+}
+
+html{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+}
+
+/* Variables */
+
+:root{
+    /* Colors */
+    --light-grey: #e0e0e0;
+    --medium-grey: #bdbdbd;
+    --dark-grey: #9e9e9e
+}
+
+
+/* Generic classes */
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.cursor-wait{
+    cursor: wait;
+}
+
+.loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+}
+
+/* App CSS */
+
+#app-container{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#app-content{
+    width: 100%;
+    min-height: inherit;
+}
+
+/* Nav bar */
+
+#app-nav{
+    display: flex;
+    position: absolute;
+    z-index: 2;
+    top: 24px;
+    right: 24px;
+    width: fit-content;
+    
+    flex-direction: column;
+    gap: 12px;
+}
+
+.app-nav-button{
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.app-nav-button:active{
+    transform: scale(0.9);
+}
+
+.app-nav-button svg{
+    width: 100%;
+    height: auto;
+}
+
+/* Reset button */
+
+#reset-button svg{
+    fill: none;
+    stroke: var(--light-grey);
+    stroke-width: 2;
+}
+
+#reset-button:hover svg{
+    stroke: var(--medium-grey);
+}
+
+#reset-button:active svg{
+    stroke: var(--dark-grey);
+}
+
+/* Volume button */
+#volume-button{
+    position: relative;
+}
+
+#volume-button:active{
+    transform: unset;
+}
+
+#volume-button:active label{
+    transform: scale(0.9);
+}
+
+#volume-button label svg{
+    fill: var(--light-grey);
+}
+
+#volume-button label:hover svg{
+    fill: var(--medium-grey);
+}
+
+#volume-button label:active svg{
+    fill: var(--dark-grey);
+}
+
+#volume-button label{
+    display: block;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+#volume-button-checkbox{
+    display: none;
+}
+
+#volume-range{
+    display: none;
+
+    position: absolute;
+    width: 100px;
+    top: 50%;
+    left: -112px;
+    transform: translateY(-50%);
+
+    -webkit-appearance: none;
+    appearance: none;
+    width: 96px;
+    height: 18px;
+    border-radius: 9px;
+    background-color: var(--light-grey);
+}
+
+#volume-button-checkbox:checked ~ #volume-range{
+    display: block;
+}
+
+#volume-range::-webkit-slider-thumb,
+#volume-range::-moz-range-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: transparent;
+    background-color: var(--medium-grey);
+}
+
+/* Home button */
+
+#home-button{
+    display: block;
+    text-decoration: none;
+    color: black;
+    fill: var(--light-grey);
+}
+
+#home-button:hover{
+    fill: var(--medium-grey);
+}
+
+#home-button:active{
+    fill: var(--dark-grey);
+}
+
+#home-button:visited{
+    color: black;
+}
+
+/* Info button */
+
+#info-button{
+    fill: var(--light-grey);
+}
+
+#info-button:hover{
+    fill: var(--medium-grey);
+}
+
+#info-button:active{
+    fill: var(--dark-grey);
+}
+
+/* Info modal */
+
+#info-modal-checkbox{
+    display: none;
+}
+
+#info-modal-background{
+    display: none;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    z-index: 10000;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#info-modal-checkbox:checked ~ #info-modal-background{
+    display: block;
+}
+
+#info-modal{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 640px;
+    padding: 1em;
+    background-color: #ffffff;
+    -webkit-box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.5); 
+    box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.5);
+}
+
+.close-modal{
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 32px;
+    height: 32px;
+    border: none;
+
+    padding: 0;
+    background: none;
+    
+    fill: var(--light-grey);
+    cursor: pointer;
+}
+
+.close-modal svg,
+.close-modal label{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.close-modal:hover{
+    fill: var(--medium-grey);
+}
+
+.close-modal:active{
+    fill: var(--dark-grey);
+    transform: scale(0.9);
+}
+
+#info-modal-title{
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.info-modal-subtitle{
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+.info-modal-text{
+    text-align: justify;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+}
