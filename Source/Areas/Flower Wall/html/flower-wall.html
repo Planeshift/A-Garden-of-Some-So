@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Garden Of Some Sort</title>
+    <link rel="stylesheet" href="../../Shared/css/areas-common.css">
+    <link rel="stylesheet" href="../css/flower-wall.css">
+</head>
+<body>
+    <div id="app-container">
+
+        <!-- App navigation -->
+        @@include("../../Shared/html/app-nav.html")
+
+        <!-- Info modal -->
+        @@include("../../Shared/html/info-modal.html", {
+            "title" : "Flower Wall",
+            "about-text" : "Click anywhere on the background to create a flower.",
+            "credits-text" : "The harp sounds were made using the VST \"Etherealwinds Harp II: Community Edition\" with Podium Free, a free DAW ; the VST file can be found <a href=\"https://vis.versilstudios.com/etherealwinds-harp.html\">here</a>."
+        })
+
+        <!-- Where the magic happens -->
+        <div id="app-content" class="cursor-wait">
+        </div>
+    </div>
+    <script src="../../Shared/js/volume.js"></script>
+    <script src="../js/flower-wall.js"></script> 
+</body>
+</html>

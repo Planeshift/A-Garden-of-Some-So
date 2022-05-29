@@ -23,6 +23,7 @@ body{
 html{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 18px;
+    line-height: 1.5;
 }
 
 h1{
@@ -37,6 +38,22 @@ h2{
     font-weight: bold;
     margin: 1rem 0 1rem;
     text-align: center;
+}
+
+.full-width-800{
+    margin: 0 auto;
+    max-width: 800px;
+    width: 100%;
+}
+
+.justify{
+    text-align: justify;
+}
+
+.link{
+    color: var(--light-green);
+    text-decoration: none;
+    border-bottom: var(--light-green) solid 2px;
 }
 
 /* Content CSS */
@@ -85,12 +102,6 @@ header{
     display: flex;
     justify-content: space-between;
     font-size: 1.25rem;
-}
-
-.header-nav-link{
-    color: var(--light-green);
-    text-decoration: none;
-    border-bottom: var(--light-green) solid 2px;
 }
 
 .separator{

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Garden Of Some Sort</title>
+    <link rel="stylesheet" href="../../Shared/css/areas-common.css">
+    <link rel="stylesheet" href="../css/flooding-tiles.css">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <!-- App navigation -->
+        @@include("../../Shared/html/app-nav.html")
+
+        <!-- Info modal-->
+        @@include("../../Shared/html/info-modal.html", {
+            "title" : "Flooding Tiles",
+            "about-text" : "Click on the white background to spawn a bouncing tile. Then, click on it and subsequent tiles to make other tiles appear beneath, centered on where you clicked, their colors and size randomized.",
+            "credits-text" :"<ul><li>The bouncing \"boing\" sounds made by a square when appearing were made by plingativator and can be found <a href=\"https://freesound.org/people/plingativator/sounds/188869/\">here</a>.</li><li>The popping sound made when a square disappear were made by ScratchnSniff and can be found <a href=\"https://freesound.org/people/ScratchnSniff/sounds/242113/\">here</a>.</li></ul>"
+        })
+
+        <!-- Where the magic happens -->
+        <div id="app-content" class="cursor-wait">
+        </div>
+    </div>
+
+    <script src="../../Shared/js/volume.js"></script>
+    <script src="../js/flooding-tiles.js"></script>
+</body>
+</html>

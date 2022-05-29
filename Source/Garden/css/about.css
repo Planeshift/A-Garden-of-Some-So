@@ -1,0 +1,11 @@
+#email-button{
+    display: inline;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    padding: 0;
+    background: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.8em;
+}

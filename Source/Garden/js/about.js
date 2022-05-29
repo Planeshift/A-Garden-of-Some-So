@@ -7,6 +7,7 @@ document.getElementById("email-button").addEventListener("click", function(e){
     let domain = "gmail.com";
 
     let link = document.createElement("a");
+    link.classList.add("link");
     link.href = "mailto:" + mail + "@" + domain;
     link.innerText = mail + "@" + domain;
     parent.appendChild(link);
