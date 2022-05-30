@@ -12,6 +12,7 @@ const audioBoings = [
     new Audio("../audio/boing3.mp3"),
     new Audio("../audio/boing4.mp3"),
     new Audio("../audio/boing5.mp3"),
+    new Audio("../audio/boing6.mp3")
 ]
 
 const audioRemoves = [
