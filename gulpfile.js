@@ -28,8 +28,17 @@ async function copyAreas(){
         .pipe(gulp.dest("./Build/"));
 }
 
+async function copyBaseFiles(){
+    return gulp.src([
+        "./Source/.htaccess",
+        "./Source/index.php",
+    ])
+        .pipe(gulp.dest("./Build/"));
+}
+
 exports.includeHTML = includeHTML;
 exports.copyGarden = copyGarden;
 exports.copyAreas = copyAreas;
+exports.copyBaseFiles = copyBaseFiles;
 
-exports.build = series(copyAreas, copyGarden, includeHTML);
+exports.build = series(copyAreas, copyGarden, copyBaseFiles, includeHTML);
