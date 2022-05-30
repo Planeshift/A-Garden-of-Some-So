@@ -1,16 +1,16 @@
 /* Constants */
 
 const harpSounds = [
-    new Audio("../audio/harp1.wav"),
-    new Audio("../audio/harp2.wav"),
-    new Audio("../audio/harp3.wav"),
-    new Audio("../audio/harp4.wav"),
-    new Audio("../audio/harp5.wav"),
-    new Audio("../audio/harp6.wav"),
-    new Audio("../audio/harp7.wav"),
-    new Audio("../audio/harp8.wav"),
-    new Audio("../audio/harp9.wav"),
-    new Audio("../audio/harp10.wav"),
+    new Audio("/Source/Areas/Flower Wall/audio/harp1.wav"),
+    new Audio("/Source/Areas/Flower Wall/audio/harp2.wav"),
+    new Audio("/Source/Areas/Flower Wall/audio/harp3.wav"),
+    new Audio("/Source/Areas/Flower Wall/audio/harp4.wav"),
+    new Audio("/Source/Areas/Flower Wall/audio/harp5.wav"),
+    new Audio("/Source/Areas/Flower Wall/audio/harp6.wav"),
+    new Audio("/Source/Areas/Flower Wall/audio/harp7.wav"),
+    new Audio("/Source/Areas/Flower Wall/audio/harp8.wav"),
+    new Audio("/Source/Areas/Flower Wall/audio/harp9.wav"),
+    new Audio("/Source/Areas/Flower Wall/audio/harp10.wav"),
 ]
 
 const resetDuration = 1500;

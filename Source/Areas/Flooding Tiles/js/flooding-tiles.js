@@ -7,25 +7,25 @@ const maxTileSize = 256;
 /* Audio files */
 
 const audioBoings = [
-    new Audio("../audio/boing1.mp3"),
-    new Audio("../audio/boing2.mp3"),
-    new Audio("../audio/boing3.mp3"),
-    new Audio("../audio/boing4.mp3"),
-    new Audio("../audio/boing5.mp3"),
-    new Audio("../audio/boing6.mp3")
+    new Audio("/Source/Areas/Flooding Tiles/audio/boing1.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/boing2.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/boing3.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/boing4.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/boing5.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/boing6.mp3")
 ]
 
 const audioRemoves = [
-    new Audio("../audio/plop1.mp3"),
-    new Audio("../audio/plop2.mp3"),
-    new Audio("../audio/plop3.mp3"),
-    new Audio("../audio/plop4.mp3"),
-    new Audio("../audio/plop5.mp3"),
-    new Audio("../audio/plop6.mp3"),
-    new Audio("../audio/plop7.mp3"),
-    new Audio("../audio/plop8.mp3"),
-    new Audio("../audio/plop9.mp3"),
-    new Audio("../audio/plop10.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/plop1.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/plop2.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/plop3.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/plop4.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/plop5.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/plop6.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/plop7.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/plop8.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/plop9.mp3"),
+    new Audio("/Source/Areas/Flooding Tiles/audio/plop10.mp3"),
 ]
 
 // Pre-loading

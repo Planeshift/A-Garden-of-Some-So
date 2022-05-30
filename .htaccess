@@ -1,0 +1,15 @@
+DirectoryIndex index.php
+Options -Indexes
+
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+
+# Garden URL rewriting
+RewriteRule ^(about|garden|credits)$ Build/Garden/html/$1.html [NC]
+
+# Areas URL rewriting
+RewriteRule ^flooding-tiles$ "Build/Areas/Flooding Tiles/html/flooding-tiles.html" [NC]
+RewriteRule ^flower-wall$ "Build/Areas/Flower Wall/html/flower-wall.html" [NC]
