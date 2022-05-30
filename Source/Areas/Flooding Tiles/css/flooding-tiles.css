@@ -11,6 +11,11 @@
     position: absolute;
     border-radius: 6px;
     animation: spawn-flood-tile 1000ms ease-in-out forwards;
+
+    /* Prevents blue highlighting whenever you touch the app on chrome on mobiles. */
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
 }
 
 @keyframes spawn-flood-tile {
