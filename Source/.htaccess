@@ -6,8 +6,3 @@ RewriteEngine On
 # Force HTTPS - Waiting for the SSL Certificate…
 # RewriteCond %{HTTPS} !=on
 # RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
-
-# Rewrite urls to be a tad prettier
-# RewriteRule ^Garden/html/garden.html$ garden [NC]
-# RewriteRule ^Garden/html/about.html$ about [NC]
-# RewriteRule ^Garden/html/credits.html$ credits [NC]
