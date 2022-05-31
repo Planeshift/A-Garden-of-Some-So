@@ -340,6 +340,12 @@ function resetButtonAction(){
 
 }
 
+/**
+ * Get a random yellow color as a hsl string, working for a CSS property.
+ * 
+ * @returns 
+ */
+
 function getPistilColor(){
     let h = Math.random() * 20 + 35;
     let s = Math.random() * 50 + 50;
@@ -347,6 +353,12 @@ function getPistilColor(){
 
     return `hsl(${h}, ${s}%, ${l}%)`
 }
+
+/**
+ * Get n shades of petal colors, that are excluded from being too close to the green background or too yellow.
+ * @param {*} n Number of shades needed.
+ * @returns An array of N colors, represented as hsl strings that work as CSS properties.
+ */
 
 function getPetalColors(n = 1){
     let h;
@@ -369,18 +381,38 @@ function getPetalColors(n = 1){
     return [`hsl(${h}, ${s}%, ${l}%)`];
 }
 
+/**
+ * Gets a random number of petals, between 9 and 14.
+ * @returns A random number of petals.
+ */
+
 function getPetalNumber(){
     return Math.floor(9 + Math.random() * 6);
 }
 
+/**
+ * Gets a random number of crowns, between 2 and 3.
+ * 
+ * @returns A random number of crowns.
+ */
 function getCrownNumber(){
     return Math.floor(2 + Math.random() * 2); 
 }
+
+/**
+ * Gets the random base scaling for a crown of flower, between 0.5 (included) and 1 (excluded).
+ * @returns A number between 0.5 and 1.
+ */
 
 function getMinCrownScaleSize(){
     return 0.5 + Math.random() * 0.5;
 }
 
+/**
+ * Produces a random pastel color by returning an HSL string with high saturation and high light values.
+ * 
+ * @returns {String} A string giving the hsl value for a CSS color.
+ */
 function getRandomPastelColor(){
     let h = Math.random() * 360;
     let s = Math.random() * 10 + 65;
@@ -389,13 +421,17 @@ function getRandomPastelColor(){
     return `hsl(${h}, ${s}%, ${l}%)`
 }
 
+/**
+ * Gets a random base scaling for a flower, between 0.7 and 1.1 (excluded).
+ * @returns A number between 0.7 and 1.1.
+ */
 function getFlowerScale(){
     return 0.7 + 0.4 * Math.random();
 }
 
 
 /**
- * Prevents the same note from being played twice in a row
+ * Prevents the same note from being played twice in a row, by storing the value in previousHarpSoundNumber.
  */
 
 let previousHarpSoundNumber;

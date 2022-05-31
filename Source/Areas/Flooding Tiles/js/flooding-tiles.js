@@ -110,7 +110,7 @@ class FloodTile {
     }
 
     /**
-     * 
+     * Remove this tile and play the audio
      */
     remove() {
         this.tile.remove();
@@ -118,8 +118,9 @@ class FloodTile {
         this.audioRemove.play();
     }
     /**
+     * Create another flood tile from a click event, using its coordinates as the center of our new tile.
      * 
-     * @param {Event} e 
+     * @param {MouseEvent} e The click event.
      */
     spawnFloodTile(e) {
         let offsetX = e.offsetX;
@@ -127,7 +128,7 @@ class FloodTile {
 
         let spawningTileSize = this.tile.offsetWidth;
 
-        // Get the lowest orthogonal distance between the point clicked and any side of the tile
+        // Get the lowest orthogonal distance between the point clicked and any side of the tile, then multiply by 3 to set our minimal size for the new tile
         let minSize = 3 * Math.min(offsetX, offsetY, spawningTileSize - offsetX, spawningTileSize - offsetY);
 
         // Slightly bigger, in order to prevent tiles from overlapping too much at min size
@@ -136,12 +137,16 @@ class FloodTile {
         // Set minSize to minTileSize if it’s still lower than it
         minSize = Math.max(minSize, minTileSize);
 
+        // Same as earlier, but for the maximal size
         let maxSize = 1.5 * Math.max(offsetX, offsetY, spawningTileSize - offsetX, spawningTileSize - offsetY);
 
+        // Same logic
         maxSize -= 20;
 
+        // Again, compare this maxSize and maxTileSize
         maxSize = Math.min(maxSize, maxTileSize);
 
+        // Get a random tileSize between our two border values
         let newTileSize = Math.random() * (maxSize - minSize) + minSize;
 
         // Create a new tile
@@ -157,13 +162,17 @@ class FloodTile {
         newTile.style.left = `calc(50% + ${newOffsetX}px)`;
 
         /* 
+        Kept for historical reasons
+
         // Background-color is randomized based on the spawning tile one, but the deviation gets smaller and smaller with each level
         let initialTileColor = this.tile.style.backgroundColor;
         let matchColors = /rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/;
         let match = matchColors.exec(initialTileColor).slice(1);
         let newTileColor = "rgb(" + match.map(color => Math.min(255, Math.max(0, (Math.random() - 1) * (1 / (this.level + 1)) * 128 + parseInt(color))) ).join(",") +")";
+
         */
 
+        // Get a random pastel color as the background for the new tile
         newTile.style.backgroundColor = getRandomPastelColor();
 
         this.tile.parentNode.appendChild(newTile);
@@ -172,6 +181,7 @@ class FloodTile {
         let audio = createAudio(audioBoings[Math.floor(Math.random() * audioBoings.length)]);
         audio.play();
 
+        // Create our flood tile object
         let newFloodTile = new FloodTile(newTile, this.level + 1, newOffsetX, newOffsetY);
         newFloodTile.init();
 
@@ -215,6 +225,11 @@ function spawnBaseFloodTile() {
     floodTiles.push(baseFloodTile);
 }
 
+/**
+ * Produces a random pastel color by returning an HSL string with high saturation and high light values.
+ * 
+ * @returns {String} A string giving the hsl value for a CSS color.
+ */
 function getRandomPastelColor() {
     let h = Math.random() * 360;
     let s = Math.random() * 10 + 65;
@@ -223,8 +238,13 @@ function getRandomPastelColor() {
     return `hsl(${h}, ${s}%, ${l}%)`
 }
 
+/**
+ * Handles the reset of the app.
+ */
+
 function resetButtonAction() {
-    // Play an animation
+
+    // Play an animation on the reset button
     document.getElementById("reset-button").animate(
         [
             { transform: "rotate(0deg)" },
@@ -238,12 +258,14 @@ function resetButtonAction() {
         }
     )
 
+    // Check if there are any flood tiles before trying to remove them
     if (floodTiles.length != 0) {
+        // This plays the sound and remove the tile immediately if there is only one tile
         if (floodTiles.length == 1) {
             floodTiles.pop().remove();
         }
         else {
-            // Remove all flood tiles
+            // Remove all flood tiles over one second
             let delay = 1000 / floodTiles.length;
 
             var interval = setInterval(function () {
@@ -255,6 +277,7 @@ function resetButtonAction() {
         }
     }
 
+    // Reinit the app after one second
     setTimeout(floodTilesInit, 1000);
 }
 
