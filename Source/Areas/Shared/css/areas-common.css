@@ -57,6 +57,18 @@ ul{
     user-select: none;
 }
 
+.debug-window{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 1000000000;
+    background: transparent;
+    font-size: 1.2rem;
+    padding: 1em;
+    font-weight: bold;
+    color: white;
+}
+
 /* App CSS */
 
 #app-container{
