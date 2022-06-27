@@ -19,6 +19,18 @@ const appContent = document.getElementById("app-content");
 
 const resetButton = document.getElementById("reset-button");
 
+// AUDIO STUFF
+
+// Initialize volume types
+
+let volumeMaster = new VolumeType("master", document.getElementById("volume-master"));
+volumeMaster.init();
+
+let volumeMusic = new VolumeType("music", document.getElementById("volume-music"));
+volumeMusic.init();
+
+let volumeSounds = new VolumeType("sounds", document.getElementById("volume-sounds"));
+volumeSounds.init();
 
 // Pre-loading
 
@@ -195,7 +207,8 @@ function createFlower(e){
     )
 
     /* Play the harp baby */
-    let audio = createAudio(harpSounds[getRandomHarpSoundNumber()]);
+    let audio = new CustomAudio(harpSounds[getRandomHarpSoundNumber()], "sounds");
+    audio.init();
     audio.play();
 
 }

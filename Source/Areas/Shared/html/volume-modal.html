@@ -1,0 +1,27 @@
+<input type="checkbox" id="volume-modal-checkbox" name="volume-modal-checkbox" autocomplete="off">
+        <div id="volume-modal-background" class="modal-background">
+            <div id="volume-modal" class="modal">
+                <button class="close-modal">
+                    <label for="volume-modal-checkbox">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                            <path d="M 7.57,78.28 C 7.57,78.28 21.72,92.43 21.72,92.43 21.72,92.43 50.00,64.14 50.00,64.14 50.00,64.14 78.28,92.43 78.28,92.43 78.28,92.43 92.43,78.28 92.43,78.28 92.43,78.28 64.14,50.00 64.14,50.00 64.14,50.00 92.43,21.72 92.43,21.72 92.43,21.72 78.28,7.57 78.28,7.57 78.28,7.57 50.00,35.86 50.00,35.86 50.00,35.86 21.72,7.57 21.72,7.57 21.72,7.57 7.57,21.72 7.57,21.72 7.57,21.72 35.86,50.00 35.86,50.00 35.86,50.00 7.57,78.28 7.57,78.28 Z"/>
+                          </svg>
+                    </label>
+                </button>
+                <div id="volume-modal-title" class="modal-title">Volume</div>
+                <div id="volume-modal-volumes">
+                    <div id="volume-master-row">
+                        <div id="volume-master-label">Master</div>
+                        <input type="range" id="volume-master" name="volume-master" class="volume-range" min="0" max="100" value="80">
+                    </div>
+                    <div id="volume-music-row">
+                        <div id="volume-music-label">Music</div>
+                        <input type="range" id="volume-music" name="volume-music" class="volume-range" min="0" max="100" value="100">
+                    </div>
+                    <div id="volume-sounds-row">
+                        <div id="volume-sounds-label">Sounds</div>
+                        <input type="range" id="volume-sounds" name="volume-sounds" class="volume-range" min="0" max="100" value="100">
+                    </div>
+                </div>
+            </div>
+        </div>

@@ -4,7 +4,20 @@ const floodTilesLevelLimit = 100;
 const minTileSize = 16;
 const maxTileSize = 256;
 
-/* Audio files */
+// AUDIO STUFF
+
+// Initialize volume types
+
+let volumeMaster = new VolumeType("master", document.getElementById("volume-master"));
+volumeMaster.init();
+
+let volumeMusic = new VolumeType("music", document.getElementById("volume-music"));
+volumeMusic.init();
+
+let volumeSounds = new VolumeType("sounds", document.getElementById("volume-sounds"));
+volumeSounds.init();
+
+// Audio files
 
 const audioBoings = [
     new Audio("/Source/Areas/Flooding Tiles/audio/boing1.mp3"),
@@ -106,7 +119,8 @@ class FloodTile {
 
     init() {
         this.tile.addEventListener("click", e => this.spawnFloodTile(e));
-        this.audioRemove = createAudio(audioRemoves[Math.floor(Math.random() * audioRemoves.length)]);
+        this.audioRemove = new CustomAudio(audioRemoves[Math.floor(Math.random() * audioRemoves.length)], "sounds");
+        this.audioRemove.init();
     }
 
     /**
@@ -114,7 +128,7 @@ class FloodTile {
      */
     remove() {
         this.tile.remove();
-        this.audioRemove.volume = getCurrentVolume();
+        this.audioRemove.updateVolume();
         this.audioRemove.play();
     }
     /**
@@ -154,7 +168,7 @@ class FloodTile {
         newTile.classList.add("flood-tile");
         newTile.style.width = `${newTileSize}px`;
         newTile.style.height = `${newTileSize}px`;
-        newTile.style.zIndex = parseInt(window.getComputedStyle(this.tile).getPropertyValue("z-index")) - 1;
+        newTile.style.zIndex = parseInt(window.getComputedStyle(this.tile).getPropertyValue("z-index"), 10) - 1;
         newTile.style.position = "absolute";
         let newOffsetX = this.X - (spawningTileSize / 2 - offsetX);
         let newOffsetY = this.Y - (spawningTileSize / 2 - offsetY);
@@ -178,7 +192,8 @@ class FloodTile {
         this.tile.parentNode.appendChild(newTile);
 
         // Play the sound for the animation
-        let audio = createAudio(audioBoings[Math.floor(Math.random() * audioBoings.length)]);
+        let audio = new CustomAudio(audioBoings[Math.floor(Math.random() * audioBoings.length)], "sounds");
+        audio.init();
         audio.play();
 
         // Create our flood tile object
@@ -219,7 +234,8 @@ function spawnBaseFloodTile() {
     audioBoings[0].play();
     */
 
-    let audio = createAudio(audioBoings[Math.floor(Math.random() * audioBoings.length)]);
+    let audio = new CustomAudio(audioBoings[Math.floor(Math.random() * audioBoings.length)], "sounds");
+    audio.init();
     audio.play();
 
     floodTiles.push(baseFloodTile);

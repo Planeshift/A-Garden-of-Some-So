@@ -2,19 +2,224 @@
 
 let audios = [];
 
-let volumeRange = document.getElementById("volume-range");
+let VolumeTypes = {}
 
-if(volumeRange){
-    volumeRange.addEventListener("change", changeVolume);
+class VolumeType {
+    constructor(
+        type,
+        DOMelement,
+    ){
+        this.type = type;
+        this.DOMelement = DOMelement;
+    }
+
+    init(){
+        this.DOMelement.addEventListener("change", changeVolume.bind(this));
+        VolumeTypes[this.type] = this;
+    }
 }
 
 /**
- * Gets the current volume from volume-range (expecting a value between 0 and 100)
- * @returns {Number} A value between 0 and 1.
+ * 
  */
+class CustomAudio {
+    /**
+     * 
+     * @param {String|HTMLElement} source 
+     * @param {String} volumeType 
+     * @param {Number} volumeModifier 
+     * @param {Boolean} playOnce 
+     */
+    constructor(
+        source,
+        volumeType = "master",
+        volumeModifiers = {},
+        playOnce = true,
+        fadeInDuration = 0,
+        fadeOutDuration = 0,
+    ){
+        this.source = source;
+        this.volumeType = volumeType;
+        this.volumeModifiers = volumeModifiers;
+        this.playOnce = playOnce;
+        this.audio = undefined;
+        this.fadeInDuration = fadeInDuration;
+        this.fadeOutDuration = fadeOutDuration;
+    }
 
- function getCurrentVolume(){
-    return parseInt(document.getElementById("volume-range").value) / 100;
+    init(override = false){
+        if(typeof(this.source) == "string"){
+            if(override || this.audio == undefined){
+                this.audio = new Audio(this.source);
+            }
+        }else if(this.source instanceof HTMLAudioElement){
+            if(override || this.audio == undefined){
+                this.audio = this.source.cloneNode();
+            }
+        }else{
+            return undefined;
+        }
+
+        if(this.audio){
+            if(this.playOnce){
+                this.audio.addEventListener("ended", removeAudioFromAudios)
+            }
+
+            this.updateVolume();
+
+            if(this.fadeInDuration){
+                let remainingDuration = this.fadeInDuration;
+                this.volumeModifiers["fadeIn"] = 0;
+                let step = 10;
+                let volumeIncrease = Math.min(1, step / this.fadeInDuration);
+
+                function fadeInVolume(rD, step, volInc){
+                    this.volumeModifiers["fadeIn"] = Math.min(1, this.volumeModifiers["fadeIn"] + volInc);
+
+                    this.updateVolume();
+
+                    if(rD > 0){
+                        setInterval(fadeInVolume(rD - step, step, volInc).bind(this), step);
+                    }
+                }
+
+                fadeInVolume(remainingDuration, step, volumeIncrease).bind(this);
+            }
+        }
+
+        audios.push(this);
+    }
+
+    play(){
+        this.audio.play();
+    }
+
+    updateVolume(value = undefined, ignoreModifiers = false){
+
+        if(typeof value === "number"){
+            this.audio.volume = value;
+        }else{
+            let volumeTypeValue = 1;
+
+            if(this.volumeType != "master"){
+                volumeTypeValue *= VolumeTypes["master"].DOMelement.value / 100;
+            }
+
+            for(let key in VolumeTypes){
+                if(key == this.volumeType){
+                    volumeTypeValue *= VolumeTypes[key].DOMelement.value / 100;
+                    break;
+                }
+            }
+
+            this.audio.volume = volumeTypeValue;
+        }
+
+        // Apply modifiers
+        if(!ignoreModifiers){
+            for(let key in this.volumeModifiers){
+                this.audio.volume *= this.volumeModifiers[key];
+            }
+        }
+    }
+}
+
+class AudioEmitter{
+    constructor(
+        DOMElement,
+        customAudio,
+        center = {x: "50%", y: "50%"},
+        maxDistance = "200vw",
+    ){
+        this.DOMElement = DOMElement;
+        this.customAudio = customAudio;
+        this.center = center;
+        this.maxDistance = maxDistance;
+    }
+
+    init(){
+        this.customAudio.play();
+        this.updateDistanceVolumeModifier(50);
+    }
+
+    updateDistanceVolumeModifier(step = 0){
+        let centerX = this.center.x.trim();
+        let centerY = this.center.y.trim();
+        let maxD = this.maxDistance;
+        
+        // TODO: Proper CSS interpretation
+
+        // Test percentage
+        let regexPercentage = /^-{0,1}\d{1,}\.{0,1}\d{0,}%$/;
+
+        if(regexPercentage.exec(centerX)){
+            centerX = window.innerWidth * parseFloat(centerX) / 100;
+        }
+
+        if(regexPercentage.exec(centerY)){
+            centerY = window.innerHeight * parseFloat(centerY) / 100;
+        }
+
+        // Test vw / vh
+
+        let regexVW = /^-{0,1}\d{1,}\.{0,1}\d{0,}vw$/;
+
+        if(regexVW.exec(centerX)){
+            centerX = window.innerWidth * parseFloat(centerX) / 100;
+        }
+        if(regexVW.exec(centerY)){
+            centerY = window.innerWidth * parseFloat(centerY) / 100;
+        }
+
+        if(regexVW.exec(maxD)){
+            maxD = window.innerWidth * parseFloat(maxD) / 100;
+        }
+
+        let regexVH = /^-{0,1}\d{1,}\.{0,1}\d{0,}vh$/;
+
+        if(regexVH.exec(centerX)){
+            centerX = window.innerHeight * parseFloat(centerX) / 100;
+        }
+
+        if(regexVH.exec(centerY)){
+            centerY = window.innerHeight * parseFloat(centerY) / 100;
+        }
+
+        if(regexVW.exec(maxD)){
+            maxD = window.innerHeight * parseFloat(maxD) / 100;
+        }
+
+        // Test px
+
+        let regexPX = /^-{0,1}\d{1,}\.{0,1}\d{0,}px$/;
+
+        if(regexPX.exec(centerX)){
+            centerX = parseFloat(centerX);
+        }
+
+        if(regexPX.exec(centerY)){
+            centerY = parseFloat(centerY);
+        }
+
+        if(regexPX.exec(maxD)){
+            maxD = parseFloat(maxD);
+        }
+
+
+        let position = getPositionAtCenter(this.DOMElement);
+
+        let distance = getDistanceBetweenPoints(position.x, centerX, position.y, centerY);
+
+        if(distance >= maxD){
+            this.customAudio.volumeModifiers[distance] = 0;
+        }else{
+            this.customAudio.volumeModifiers[distance] = (1 - distance / maxD);
+        }
+
+        if(this.DOMElement && step){
+            setInterval(this.updateDistanceVolumeModifier(step), step);
+        }
+    }
 }
 
 /**
@@ -22,39 +227,22 @@ if(volumeRange){
  */
 
 function changeVolume(){
-    let currentVolume = getCurrentVolume();
-    audios.forEach(audio => audio.volume = currentVolume);
-}
+    let currentVolume = parseInt(this.DOMelement.value, 10) / 100;
 
-/**
- * Creates an HTMLAudioElement and adds it to the audios array.
- * 
- * @param {String|HTMLAudioElement} src Either the src of the audio file, or another HTMLAudioElement that this element will be a copy of.
- * @param {Boolean=true} playOnce Optional. If set to true, the audio will be automatically removed from the audios array. Default to true.
- * @param {Boolean=true} applyCurrentVolume Optional. If set to true, will get the current volume level and apply it to the audio. Default to true.
- * @returns Either the HTMLAudioElement with the given src or a copy of the src, or undefined.
- */
-
-function createAudio(src, playOnce = true, applyCurrentVolume = true){
-    let audio;
-    if(typeof(src) == "string"){
-        audio = new Audio(src);
-    }else if(src instanceof HTMLAudioElement){
-        audio = src.cloneNode();
+    if(this.type != "master"){
+        // If not the master volume, we need to get the master volume value to make our volumes properly relative to it
+        currentVolume *= parseInt(document.getElementById("volume-master").value, 10) / 100;
+        audios.forEach(audio => {
+            if(audio.volumeType == this.type){
+                audio.updateVolume(currentVolume);
+            }
+        });
     }else{
-        return undefined;
+        // If master volume, then we need to update every audio to adjust its level based on the master level
+        audios.forEach(audio => {
+            audio.updateVolume(currentVolume * audio.audio.volume);
+        })
     }
-    audios.push(audio);
-
-    if(playOnce){
-        audio.addEventListener("ended", removeAudioFromAudios)
-    }
-
-    if(applyCurrentVolume){
-        audio.volume = getCurrentVolume();
-    }
-
-    return audio;
 }
 
 /**
@@ -64,7 +252,14 @@ function createAudio(src, playOnce = true, applyCurrentVolume = true){
  */
 
 function removeAudioFromAudios(event){
-    console.log(audios);
-    audios = audios.filter(audio => audio != event.target);
-    console.log(audios);
+    let length = audios.length;
+
+    for(let i = 0; i < length; i++){
+        if(audios[i].audio == event.target){
+            event.target.remove();
+            audios.splice(i,1);
+            break;
+        }
+    }
+
 }
