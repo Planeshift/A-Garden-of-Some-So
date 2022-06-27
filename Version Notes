@@ -1,3 +1,12 @@
+Version 1.1 - 2022 06 27
+
+Changes to volume.js and a proper volume menu (although with limited CSS as of yet). Not live yet, still updating stuff.
+
+- Audio is now properly handled via a CustomAudio object, allowing more finesse with the volume controls by adding multiple modifiers to it.
+- Volume is now divided in multiple types, depending on what's needed in the app. As of now, all have Master / Music / Sounds, even if there's no music (as is the case for Flooding Tiles / Flower Wall).
+- Flooding Tiles and Flower Wall code has been udptaded to reflect those changes.
+- tools.js is now a proper file for handling common js functions that may be needed (for example, distance between elements)
+
 Version 1 - 2022 05 30
 
 The site is live baby!
