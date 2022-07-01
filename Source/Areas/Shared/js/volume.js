@@ -33,18 +33,15 @@ class CustomAudio {
     constructor(
         source,
         volumeType = "master",
-        volumeModifiers = {},
         playOnce = true,
-        fadeInDuration = 0,
-        fadeOutDuration = 0,
+        loop = false,
     ){
         this.source = source;
         this.volumeType = volumeType;
-        this.volumeModifiers = volumeModifiers;
+        this.volumeModifiers = {};
         this.playOnce = playOnce;
+        this.loop = loop;
         this.audio = undefined;
-        this.fadeInDuration = fadeInDuration;
-        this.fadeOutDuration = fadeOutDuration;
     }
 
     init(override = false){
@@ -62,29 +59,14 @@ class CustomAudio {
 
         if(this.audio){
             if(this.playOnce){
-                this.audio.addEventListener("ended", removeAudioFromAudios)
+                this.audio.addEventListener("ended", function(e){
+                    removeAudioFromAudios(e.target);
+                })
             }
+
+            this.audio.loop = this.loop;
 
             this.updateVolume();
-
-            if(this.fadeInDuration){
-                let remainingDuration = this.fadeInDuration;
-                this.volumeModifiers["fadeIn"] = 0;
-                let step = 10;
-                let volumeIncrease = Math.min(1, step / this.fadeInDuration);
-
-                function fadeInVolume(rD, step, volInc){
-                    this.volumeModifiers["fadeIn"] = Math.min(1, this.volumeModifiers["fadeIn"] + volInc);
-
-                    this.updateVolume();
-
-                    if(rD > 0){
-                        setInterval(fadeInVolume(rD - step, step, volInc).bind(this), step);
-                    }
-                }
-
-                fadeInVolume(remainingDuration, step, volumeIncrease).bind(this);
-            }
         }
 
         audios.push(this);
@@ -92,6 +74,34 @@ class CustomAudio {
 
     play(){
         this.audio.play();
+    }
+
+    fade(remainingDuration, step, isFadeIn = true){
+
+        let volumeChange = step / remainingDuration;
+
+        if(isFadeIn){
+            this.volumeModifiers["fadeIn"] = 0;
+        }else{
+            this.volumeModifiers["fadeOut"] = 1;
+        }
+
+        function internalFade(remainingDuration, step, volumeChange, isFadeIn){
+            if(isFadeIn){
+                this.volumeModifiers["fadeIn"] = Math.min(1, this.volumeModifiers["fadeIn"] + volumeChange);
+            }else{
+                this.volumeModifiers["fadeOut"] = Math.max(0, this.volumeModifiers["fadeOut"] - volumeChange);
+            }
+
+            this.updateVolume();
+
+            if(remainingDuration > 0){
+                setTimeout(internalFade.bind(this, remainingDuration - step, step, volumeChange, isFadeIn), step);
+            }
+        }
+
+        internalFade.bind(this, remainingDuration, step, volumeChange, isFadeIn)();
+        
     }
 
     updateVolume(value = undefined, ignoreModifiers = false){
@@ -122,6 +132,10 @@ class CustomAudio {
             }
         }
     }
+
+    remove(){
+        removeAudioFromAudios(this);
+    }
 }
 
 class AudioEmitter{
@@ -140,6 +154,13 @@ class AudioEmitter{
     init(){
         this.customAudio.play();
         this.updateDistanceVolumeModifier(50);
+    }
+
+    remove(removeDOMElement = false){
+        this.customAudio.remove();
+        if(removeDOMElement){
+            this.DOMElement.remove();
+        }
     }
 
     updateDistanceVolumeModifier(step = 0){
@@ -211,13 +232,15 @@ class AudioEmitter{
         let distance = getDistanceBetweenPoints(position.x, centerX, position.y, centerY);
 
         if(distance >= maxD){
-            this.customAudio.volumeModifiers[distance] = 0;
+            this.customAudio.volumeModifiers["distance"] = 0;
         }else{
-            this.customAudio.volumeModifiers[distance] = (1 - distance / maxD);
+            this.customAudio.volumeModifiers["distance"] = (1 - distance / maxD);
         }
 
-        if(this.DOMElement && step){
-            setInterval(this.updateDistanceVolumeModifier(step), step);
+        this.customAudio.updateVolume();
+
+        if(this.DOMElement.parentNode && step){
+            setTimeout(this.updateDistanceVolumeModifier.bind(this, step), step);
         }
     }
 }
@@ -227,36 +250,34 @@ class AudioEmitter{
  */
 
 function changeVolume(){
-    let currentVolume = parseInt(this.DOMelement.value, 10) / 100;
-
     if(this.type != "master"){
-        // If not the master volume, we need to get the master volume value to make our volumes properly relative to it
-        currentVolume *= parseInt(document.getElementById("volume-master").value, 10) / 100;
+        // Only update relevant audios
         audios.forEach(audio => {
             if(audio.volumeType == this.type){
-                audio.updateVolume(currentVolume);
+                audio.updateVolume();
             }
         });
     }else{
-        // If master volume, then we need to update every audio to adjust its level based on the master level
+        // Need to update all audios
         audios.forEach(audio => {
-            audio.updateVolume(currentVolume * audio.audio.volume);
+            audio.updateVolume();
         })
     }
 }
 
 /**
- * Removes an HTMLAudioElement from the audios array.
+ * Removes a CustomAudio from the audios array.
  * 
- * @param {Event} event 
+ * @param {CustomAudio} customAudio
  */
 
-function removeAudioFromAudios(event){
+function removeAudioFromAudios(customAudio){
     let length = audios.length;
 
     for(let i = 0; i < length; i++){
-        if(audios[i].audio == event.target){
-            event.target.remove();
+        if(audios[i] == customAudio){
+            customAudio.audio.remove(); // This does not really remove the Audio element. It still exists. Outside of the document, just there. WHY.
+            customAudio.audio.pause();
             audios.splice(i,1);
             break;
         }

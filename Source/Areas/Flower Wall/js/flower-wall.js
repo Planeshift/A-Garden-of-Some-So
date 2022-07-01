@@ -26,12 +26,6 @@ const resetButton = document.getElementById("reset-button");
 let volumeMaster = new VolumeType("master", document.getElementById("volume-master"));
 volumeMaster.init();
 
-let volumeMusic = new VolumeType("music", document.getElementById("volume-music"));
-volumeMusic.init();
-
-let volumeSounds = new VolumeType("sounds", document.getElementById("volume-sounds"));
-volumeSounds.init();
-
 // Pre-loading
 
 let audiosToLoad = harpSounds.length;

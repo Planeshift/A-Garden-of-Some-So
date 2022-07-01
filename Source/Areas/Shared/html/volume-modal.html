@@ -1,5 +1,5 @@
 <input type="checkbox" id="volume-modal-checkbox" name="volume-modal-checkbox" autocomplete="off">
-        <div id="volume-modal-background" class="modal-background">
+        <label for="volume-modal-checkbox" id="volume-modal-background" class="modal-background">
             <div id="volume-modal" class="modal">
                 <button class="close-modal">
                     <label for="volume-modal-checkbox">
@@ -14,14 +14,20 @@
                         <div id="volume-master-label">Master</div>
                         <input type="range" id="volume-master" name="volume-master" class="volume-range" min="0" max="100" value="80">
                     </div>
-                    <div id="volume-music-row">
-                        <div id="volume-music-label">Music</div>
-                        <input type="range" id="volume-music" name="volume-music" class="volume-range" min="0" max="100" value="100">
-                    </div>
-                    <div id="volume-sounds-row">
-                        <div id="volume-sounds-label">Sounds</div>
-                        <input type="range" id="volume-sounds" name="volume-sounds" class="volume-range" min="0" max="100" value="100">
-                    </div>
+                    @@if ( music === true ) {
+                        <div id="volume-music-row">
+                            <div id="volume-music-label">Music</div>
+                            <input type="range" id="volume-music" name="volume-music" class="volume-range" min="0" max="100" value="100">
+                        </div>
+                    }
+                    
+                    @@if ( sounds === true ){
+                        <div id="volume-sounds-row">
+                            <div id="volume-sounds-label">Sounds</div>
+                            <input type="range" id="volume-sounds" name="volume-sounds" class="volume-range" min="0" max="100" value="100">
+                        </div>
+                    }
+
                 </div>
             </div>
-        </div>
+        </label>

@@ -11,12 +11,6 @@ const maxTileSize = 256;
 let volumeMaster = new VolumeType("master", document.getElementById("volume-master"));
 volumeMaster.init();
 
-let volumeMusic = new VolumeType("music", document.getElementById("volume-music"));
-volumeMusic.init();
-
-let volumeSounds = new VolumeType("sounds", document.getElementById("volume-sounds"));
-volumeSounds.init();
-
 // Audio files
 
 const audioBoings = [
