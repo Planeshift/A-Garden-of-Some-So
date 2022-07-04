@@ -1,29 +1,30 @@
-<input type="checkbox" id="info-modal-checkbox" name="info-modal-checkbox" autocomplete="off">
-        <label for="info-modal-checkbox" id="info-modal-background" class="modal-background">
-            <div id="info-modal" class="modal">
-                <button class="close-modal">
-                    <label for="info-modal-checkbox">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                            <path d="M 7.57,78.28 C 7.57,78.28 21.72,92.43 21.72,92.43 21.72,92.43 50.00,64.14 50.00,64.14 50.00,64.14 78.28,92.43 78.28,92.43 78.28,92.43 92.43,78.28 92.43,78.28 92.43,78.28 64.14,50.00 64.14,50.00 64.14,50.00 92.43,21.72 92.43,21.72 92.43,21.72 78.28,7.57 78.28,7.57 78.28,7.57 50.00,35.86 50.00,35.86 50.00,35.86 21.72,7.57 21.72,7.57 21.72,7.57 7.57,21.72 7.57,21.72 7.57,21.72 35.86,50.00 35.86,50.00 35.86,50.00 7.57,78.28 7.57,78.28 Z"/>
-                          </svg>
-                    </label>
-                </button>
-                <div id="info-modal-title" class="modal-title">@@title</div>
-                <div id="info-modal-about">
-                    <div class="info-modal-subtitle">
-                        About
-                    </div>
-                    <div class="info-modal-text">
-                        @@about-text
-                    </div>
-                </div>
-                <div id="info-modal-credits">
-                    <div class="info-modal-subtitle">
-                        Credits
-                    </div>
-                    <div class="info-modal-text">
-                        @@credits-text
-                    </div>
-                </div>
+<input type="checkbox" id="info-modal-checkbox" class="modal-checkbox" name="info-modal-checkbox" autocomplete="off">
+<div id="info-modal-container" class="modal-container">
+    <label for="info-modal-checkbox" id="info-modal-background" class="modal-background"></label>
+    <div id="info-modal" class="modal">
+        <button class="close-modal">
+            <label for="info-modal-checkbox">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <path d="M 7.57,78.28 C 7.57,78.28 21.72,92.43 21.72,92.43 21.72,92.43 50.00,64.14 50.00,64.14 50.00,64.14 78.28,92.43 78.28,92.43 78.28,92.43 92.43,78.28 92.43,78.28 92.43,78.28 64.14,50.00 64.14,50.00 64.14,50.00 92.43,21.72 92.43,21.72 92.43,21.72 78.28,7.57 78.28,7.57 78.28,7.57 50.00,35.86 50.00,35.86 50.00,35.86 21.72,7.57 21.72,7.57 21.72,7.57 7.57,21.72 7.57,21.72 7.57,21.72 35.86,50.00 35.86,50.00 35.86,50.00 7.57,78.28 7.57,78.28 Z"/>
+                    </svg>
+            </label>
+        </button>
+        <div id="info-modal-title" class="modal-title">@@title</div>
+        <div id="info-modal-about">
+            <div class="info-modal-subtitle">
+                About
             </div>
-        </label>
+            <div class="info-modal-text">
+                @@about-text
+            </div>
+        </div>
+        <div id="info-modal-credits">
+            <div class="info-modal-subtitle">
+                Credits
+            </div>
+            <div class="info-modal-text">
+                @@credits-text
+            </div>
+        </div>
+    </div>
+</div>

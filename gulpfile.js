@@ -38,6 +38,7 @@ async function buildFlowerWall(){
             context: {
                 music: false,
                 sounds: false,
+                achievements: false,
             }
         }))
         .pipe(replace(/Source\/Garden\/html\/(about|garden|credits)\.html/g, "$1"))
@@ -55,6 +56,7 @@ async function buildFloodingTiles(){
         context: {
             music: false,
             sounds: false,
+            achievements: false,
         }
     }))
     .pipe(replace(/Source\/Garden\/html\/(about|garden|credits)\.html/g, "$1"))
@@ -72,6 +74,7 @@ async function buildEndlessNight(){
         context: {
             music: true,
             sounds: true,
+            achievements: true,
         }
     }))
     .pipe(replace(/Source\/Garden\/html\/(about|garden|credits)\.html/g, "$1"))
@@ -100,6 +103,8 @@ async function copyAreas(){
 }
 
 exports.buildHTML = buildHTML;
+exports.buildAreas = series(buildEndlessNight, buildFloodingTiles, buildFlowerWall);
+exports.buildEndlessNight = buildEndlessNight;
 exports.copyGarden = copyGarden;
 exports.copyAreas = copyAreas;
 

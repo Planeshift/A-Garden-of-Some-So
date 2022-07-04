@@ -69,14 +69,29 @@ ul{
     color: white;
 }
 
+.black-emoji{
+    fill: transparent;
+    color: transparent;
+    text-shadow: 0 0 0 #000000;
+}
 /* Modal stuff */
 
-.modal-background{
+.modal-checkbox{
+    display: none;
+}
+
+.modal-container{
     display: none;
     position: absolute;
     height: 100vh;
     width: 100%;
     z-index: 10000;
+}
+
+.modal-background{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -87,10 +102,12 @@ ul{
     transform: translate(-50%, -50%);
     width: 100%;
     max-width: 640px;
+    max-height: 95%;
     padding: 1em;
     background-color: #ffffff;
     -webkit-box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.5); 
     box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.5);
+    overflow-y: scroll;
 }
 
 .modal-title{
@@ -99,6 +116,38 @@ ul{
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 1rem;
+}
+
+
+.close-modal{
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 32px;
+    height: 32px;
+    border: none;
+
+    padding: 0;
+    background: none;
+    
+    fill: var(--light-grey);
+    cursor: pointer;
+}
+
+.close-modal svg,
+.close-modal label{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.close-modal:hover{
+    fill: var(--medium-grey);
+}
+
+.close-modal:active{
+    fill: var(--dark-grey);
+    transform: scale(0.9);
 }
 
 
@@ -137,6 +186,12 @@ ul{
     border: none;
     padding: 0;
     cursor: pointer;
+}
+
+.app-nav-button label,
+.app-nav-button svg,
+.app-nav-button path{
+    cursor:pointer;
 }
 
 .app-nav-button:active{
@@ -196,39 +251,6 @@ ul{
     cursor: pointer;
 }
 
-#volume-modal-checkbox{
-    display: none;
-}
-
-#volume-modal-background{
-    display: none;
-    position: absolute;
-    height: 100vh;
-    width: 100%;
-    z-index: 10000;
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
-#volume-modal-checkbox:checked ~ #volume-modal-background{
-    display: block;
-}
-
-.volume-range::-webkit-slider-thumb,
-.volume-range::-moz-range-thumb{
-    -webkit-appearance: none;
-    appearance: none;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: transparent;
-    background-color: var(--medium-grey);
-}
-
-.volume-range::-webkit-slider-runnable-track,
-.volume-range::-moz-range-track{
-    background-color: black;
-}
-
 /* Home button */
 
 #home-button{
@@ -264,67 +286,24 @@ ul{
     fill: var(--dark-grey);
 }
 
-/* Info modal */
+/* Achievements button */
 
-#info-modal-checkbox{
-    display: none;
-}
-
-#info-modal-background{
-    display: none;
-    position: absolute;
-    height: 100vh;
-    width: 100%;
-    z-index: 10000;
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
-#info-modal-checkbox:checked ~ #info-modal-background{
-    display: block;
-}
-
-#info-modal{
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    max-width: 640px;
-    padding: 1em;
-    background-color: #ffffff;
-    -webkit-box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.5); 
-    box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.5);
-}
-
-.close-modal{
-    position: absolute;
-    top: 1em;
-    right: 1em;
-    width: 32px;
-    height: 32px;
-    border: none;
-
-    padding: 0;
-    background: none;
-    
+#achievements-button{
     fill: var(--light-grey);
-    cursor: pointer;
 }
 
-.close-modal svg,
-.close-modal label{
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.close-modal:hover{
+#achievements-button:hover{
     fill: var(--medium-grey);
 }
 
-.close-modal:active{
+#achievements-button:active{
     fill: var(--dark-grey);
-    transform: scale(0.9);
+}
+
+/* Info modal */
+
+#info-modal-checkbox:checked ~ #info-modal-container{
+    display: block;
 }
 
 #info-modal-title{
@@ -346,3 +325,94 @@ ul{
     margin-bottom: 1rem;
     padding: 0 1rem;
 }
+
+/* Volume modal */
+
+#volume-modal-checkbox:checked ~ #volume-modal-container{
+    display: block;
+}
+
+.volume-range::-webkit-slider-thumb,
+.volume-range::-moz-range-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: transparent;
+    background-color: var(--medium-grey);
+}
+
+.volume-range::-webkit-slider-runnable-track,
+.volume-range::-moz-range-track{
+    background-color: black;
+}
+
+/* Achievements modal */
+
+#achievements-modal-checkbox:checked ~ #achievements-modal-container{
+    display: block;
+}
+
+/* Achievements */
+
+#achievements-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.achievement-container{
+    display: grid;
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid black;
+
+    grid-template-areas: 
+        "icon title"
+        "icon desc";
+
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: repeat(2, 1fr);
+    column-gap: 1rem;
+}
+
+.achievement-icon{
+    grid-area: 1 / 1 / 3 / 2;
+    user-select: none;
+}
+
+.achievement-icon svg{
+    width: 100%;
+}
+
+.achievement-unkwown-icon{
+    fill: var(--medium-grey);
+}
+
+.achievement-title{
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+
+.achievement-desc{
+    grid-area: 2 / 2 / 3 / 3;
+    text-align: center;
+}
+
+.achievement-pop-up{
+    position: absolute;
+    background-color: white;
+    z-index: 10000;
+    width: 100%;
+    max-width: 800px;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.5); 
+    box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.5);
+}
+
