@@ -3,7 +3,6 @@ const { series } = require('gulp');
 const fileinclude = require('gulp-file-include');
 const replace = require('gulp-replace');
 
-
 async function buildHTML() {
     return gulp.src("./Source/**/html/*.html", {base: "./Source/"})
         .pipe(fileinclude({

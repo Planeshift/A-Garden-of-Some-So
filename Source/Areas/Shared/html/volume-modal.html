@@ -11,21 +11,21 @@
                 </label>
             </button>
             <div id="volume-modal-title" class="modal-title">Volume</div>
-            <div id="volume-modal-volumes">
-                <div id="volume-master-row">
-                    <div id="volume-master-label">Master</div>
+            <div id="volume-modal-volumes" class="modal-content">
+                <div id="volume-master-row" class="volume-row">
+                    <div id="volume-master-label" class="volume-range-label">Master</div>
                     <input type="range" id="volume-master" name="volume-master" class="volume-range" min="0" max="100" value="80">
                 </div>
                 @@if ( music === true ) {
-                    <div id="volume-music-row">
-                        <div id="volume-music-label">Music</div>
+                    <div id="volume-music-row" class="volume-row">
+                        <div id="volume-music-label" class="volume-range-label">Music</div>
                         <input type="range" id="volume-music" name="volume-music" class="volume-range" min="0" max="100" value="100">
                     </div>
                 }
                 
                 @@if ( sounds === true ){
-                    <div id="volume-sounds-row">
-                        <div id="volume-sounds-label">Sounds</div>
+                    <div id="volume-sounds-row" class="volume-row">
+                        <div id="volume-sounds-label" class="volume-range-label">Sounds</div>
                         <input type="range" id="volume-sounds" name="volume-sounds" class="volume-range" min="0" max="100" value="100">
                     </div>
                 }

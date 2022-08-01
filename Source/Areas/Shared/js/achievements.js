@@ -36,6 +36,7 @@ class Achievement {
     }
 
     popUp(targetNode){
+        // Create the popup
         let achievementPopUp = document.createElement("div");
         achievementPopUp.classList.add("achievement-pop-up");
 
@@ -47,8 +48,7 @@ class Achievement {
 
         let previousTransform = window.getComputedStyle(achievementPopUp, null).getPropertyValue("transform");
 
-        console.log(previousTransform);
-
+        // Animate the popup over 5 seconds.
         let popUpAnimation = achievementPopUp.animate(
             [{
                 offset: 0,
@@ -77,9 +77,16 @@ class Achievement {
             }
         );
 
+        // Remove the popup once the animation is done.
         popUpAnimation.addEventListener("finish", function(){
             achievementPopUp.remove();
         });
+
+        // Remove the achievement popup if clicked, for now. Maybe add a close button later on.
+        // TODO: Something.
+        /* achievementPopUp.addEventListener("click", function(){
+            achievementPopUp.remove();
+        }) */
     }
 }
 
@@ -140,7 +147,6 @@ function createAchievementContainer(achievement){
 
     // If the achievement is not checked and is a secret, hide the information instead
     if (!achievement.checked && achievement.secret) {
-        console.log(achievement.secret);
         achievementTitle.textContent = "???";
         achievementDesc.textContent = "This achievement will only be revealed once done!";
     }
@@ -151,7 +157,7 @@ function createAchievementContainer(achievement){
     if(!achievement.showSecretIcon && !achievement.checked){
 
         let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.classList.add("achievement-unkwown-icon");
+        svg.classList.add("achievement-unknown-icon");
         svg.setAttribute("viewBox", "0 0 100 100");
 
         let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -163,6 +169,21 @@ function createAchievementContainer(achievement){
         // Otherwise, consider the different icon types and show the icon
         switch (achievement.iconType) {
             case "emoji":
+
+                let emoji = document.createElement("div");
+                emoji.textContent = achievement.icon;
+                emoji.classList.add("emoji-icon");
+                achievementIcon.appendChild(emoji);
+
+                // If unchecked, mask it
+                if (!achievement.checked) {
+                    emoji.classList.add("black-emoji");
+                }
+                break;
+
+                /*
+                Only worked on Firefoy, sadly. (Text-shadow + fill transparent on a text svg element did not work on Chrome)
+
                 let emojiSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                 emojiSvg.classList.add("emoji");
                 emojiSvg.setAttribute("viewBox", "0 0 25 25"); // Magic baby
@@ -182,6 +203,8 @@ function createAchievementContainer(achievement){
                 achievementIcon.appendChild(emojiSvg);
                 break;
 
+                */
+
             case "image":
                 let img = document.createElement("img");
                 img.src = achievement.icon;
@@ -190,7 +213,7 @@ function createAchievementContainer(achievement){
 
             default:
                 let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                svg.classList.add("achievement-unkwown-icon");
+                svg.classList.add("achievement-unknown-icon");
                 svg.setAttribute("viewBox", "0 0 100 100");
 
                 let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
