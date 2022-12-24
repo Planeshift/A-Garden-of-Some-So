@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Garden Of Some Sort</title>
+    <link rel="stylesheet" href="/Source/Areas/Shared/css/areas-common.css">
+    <link rel="stylesheet" href="/Source/Areas/Endless Night/css/endless-night.css">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <!-- App navigation -->
+        @@include("../../Shared/html/app-nav.html")
+
+        <!-- Volume modal -->
+        @@include("../../Shared/html/volume-modal.html")
+
+        <!-- Info modal-->
+        @@include("../../Shared/html/info-modal.html", {
+            "title" : "Endless Night",
+            "about-text" : "Click on the telescope to see what the night sky has to offer to you. You can move around by clicking and dragging.",
+            "credits-text" : "Music by <a href=\"https://pixabay.com/users/balancebay-26358719/?tab=audio&amp;utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=audio&amp;utm_content=109400\">BalanceBay</a> from <a href=\"https://pixabay.com/music/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=109400\">Pixabay</a>"
+        })
+
+        <!-- Achievements modal -->
+        @@include("../../Shared/html/achievements-modal.html")
+
+        <!-- Where the magic happens -->
+        <div id="app-content">
+            <div id="landscape">
+                <div id="telescope" class="cursor-pointer">🔭</div>
+                <div id="land"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delaunator, a module creating a delaunay triangulation for constellations -->
+    <script src="https://unpkg.com/delaunator@5.0.0/delaunator.min.js"></script>
+
+    <script src="/Source/Areas/Shared/js/achievements.js"></script>
+    <script src="/Source/Areas/Shared/js/tools.js"></script>
+    <script src="/Source/Areas/Shared/js/volume.js"></script>
+    <script src="/Source/Areas/Endless Night/js/endless-night.js"></script>
+</body>
+</html>

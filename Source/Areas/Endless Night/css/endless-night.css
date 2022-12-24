@@ -1,0 +1,224 @@
+
+:root{
+    --dark-sky: #121f41;
+    --light-sky: #283d5c;
+    --land: #537ea1;
+}
+
+
+/* Specific interface CSS */
+
+/* Links */
+
+#app-container a{
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Navbar */
+#app-container .app-nav-button,
+#app-container label svg{
+    fill: #ffffff;
+    stroke: #ffffff;
+}
+
+#app-container #reset-button svg{
+    stroke: #ffffff;
+}
+
+/* Modals */
+
+#app-container .modal{
+    background-color: var(--land);
+    color: #ffffff;
+}
+
+#app-container .modal-content{
+    /* Firefox scrollbar */
+    scrollbar-color: var(--light-sky) var(--land);
+}
+
+/* Chrome scrollbar */
+.modal-content::-webkit-scrollbar-track{
+    background-color: var(--land);
+}
+
+.modal-content::-webkit-scrollbar-thumb{
+    background-color: var(--light-sky);
+}
+
+/* Chrome */
+#app-container .volume-range::-webkit-slider-thumb{
+    background-color: var(--light-sky);
+}
+
+/* Firefox */
+#app-container .volume-range::-moz-range-thumb{
+    background-color: var(--light-sky);
+}
+
+.volume-range::-webkit-slider-runnable-track{
+    background-color: #ffffff;
+}
+
+.volume-range::-moz-range-track{
+    background-color: #ffffff;
+}
+
+.volume-range::-moz-range-progress{
+    background-color: var(--light-sky);
+}
+
+#app-container .achievement-pop-up{
+    background-color: transparent;
+    border-radius: 1em;
+}
+
+#app-container .achievement-container{
+    background-color: var(--light-sky);
+    color: #ffffff;
+    border-radius: 1em;
+}
+
+/* App CSS */
+
+#landscape{
+    position: relative;
+    display: flex;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(var(--dark-sky), var(--light-sky));
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+}
+
+#telescope{
+    font-size: 10vh;
+    margin-bottom: -5px;
+    user-select: none;
+}
+
+#land{
+    margin-bottom: -5%;
+    width: 150%;
+    height: 20%;
+    border-radius: 60%;
+    background-color: #537ea1;
+}
+
+.black-screen{
+    position: absolute;
+    display: flex;
+    top: -50vh;
+    left: -50vw;
+    z-index: 200;
+    width: 200vw;
+    height: 200vh;
+    background-color: black;
+    mix-blend-mode: hard-light;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+.hole{
+    background-color: gray;
+    border-radius: 50%;
+    width: min(95vw, 95vh);
+    height: min(95vw, 95vh);
+    pointer-events: none;
+}
+
+.night-sky{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: #131232;
+    overflow: hidden;
+}
+
+.night-grid{
+    position: relative;
+    user-select: none;
+    cursor: grab;
+    width: 0;
+    height: 0;
+}
+
+.night-tile{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+    color: #ffffff;
+    width: 100vw;
+    height: 100vh;
+}
+
+#moon{
+    position: absolute;
+    z-index: 102;
+    transform: translate(-50%, -50%);
+}
+
+
+.star{
+    position: absolute;
+    z-index: 101;
+}
+
+.star-constellation{
+    filter: hue-rotate(200deg);
+}
+
+.sparkle-container{
+    position: absolute;
+    z-index: 111;
+}
+
+.glowing-star-container{
+    position: absolute;
+    z-index: 110;
+}
+
+.shooting-star-container{
+    position: absolute;
+    z-index: 120;
+    cursor: pointer;
+}
+
+.shooting-star{
+    transform: rotate(225deg);
+}
+
+.comet-container{
+    position: absolute;
+    z-index: 121;
+    cursor: pointer;
+}
+
+.comet{
+    transform: rotate(225deg);
+}
+
+.rocket-container{
+    position: absolute;
+    z-index: 122;
+    cursor: pointer;
+}
+
+.rocket{
+    transform: rotate(45deg); /* makes the rocket horizontal, pointing right*/
+}
+
+.ufo-container{
+    position: absolute;
+    z-index: 123;
+    cursor: pointer;
+}
+
